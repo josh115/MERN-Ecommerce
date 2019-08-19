@@ -9,13 +9,10 @@ const ItemSchema = new Schema({
         unique: true
     },
     price: {
-        type: Decimal128,
+        type: mongoose.Decimal128,
         required: true
     },
-    image: {
-        type: String,
-        required: true
-    },
+    image: { type: String },
     category: { type: String },
     SubCategory: { type: String }
 });
