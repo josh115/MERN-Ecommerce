@@ -16,6 +16,10 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("Database connection successful")
 })
+
+const ItemsRouter = require('./routes/items')
+app.use('/items', ItemsRouter);
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
