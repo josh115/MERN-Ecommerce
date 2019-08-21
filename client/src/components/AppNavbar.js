@@ -14,27 +14,27 @@ class AppNavbar extends Component {
     render() {   
         return(
             <nav className="navbar navbar-dark bg-dark">
-                <div class="container">
+                <div className="container">
                     <a href="/" className="navbar-brand">Shop Title</a>
                     <div className="flex-row">
                         <ul className="navbar-nav flex-row">
                             <li className="nav-item">
-                                <a class="navbar-link px-2" href="#">
-                                    <img src="./images/basket.svg" />
-                                    <span class="sr-only">Basket</span>
-                                </a>
+                                <Link to="/basket" className="navbar-link px-2">
+                                    <img src="./images/basket.svg" alt="" />
+                                    <span className="sr-only">Basket</span>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a class="navbar-link px-2" href="#">
-                                    <img src="./images/search.svg" />
-                                    <span class="sr-only">Search</span>
-                                </a>
+                                <Link to="/search" className="navbar-link px-2">
+                                    <img src="./images/search.svg" alt="" />
+                                    <span className="sr-only">Search</span>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a class="navbar-link px-2" href="#">
-                                    <img src="./images/user.svg" />
-                                    <span class="sr-only">Account</span>
-                                </a>
+                                <Link to="/login" className="navbar-link px-2">
+                                    <img src="./images/user.svg" alt="" />
+                                    <span className="sr-only">Account</span>
+                                </Link>
                             </li>
                         </ul>
                     </div>

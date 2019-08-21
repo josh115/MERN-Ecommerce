@@ -1,0 +1,35 @@
+.item-list {
+  background-color: #f6f6f6;
+  max-width: 992px;
+}
+.item-img {
+  max-height: 135px;
+  max-width: 135px;
+}
+.item-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+  min-height: 150px;
+}
+.item-inner {
+  border: 1px #c1c1c1 solid;
+  background-color: #fff;
+  border-radius: 15px;
+  margin: 5px;
+}
+.add-item-btn {
+  height: 40px;
+  border-radius: 15px;
+  border: 1px #c1c1c1 solid;
+}
+.add-item-btn:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+.login {
+  max-width: 720px;
+  margin-top: 50px;
+}
