@@ -86,7 +86,7 @@ router.route("/auth").post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
-router.route("/").get(auth, (req, res) => {
+router.route("/authuser").get(auth, (req, res) => {
   User.findById(req.user.id)
     .select("-password")
     .then(user => res.json(user));
