@@ -33,3 +33,12 @@
   max-width: 720px;
   margin-top: 50px;
 }
+#nav-dropdown {
+  color: white;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+}
+#nav-dropdown:focus {
+  box-shadow: none !important;
+}

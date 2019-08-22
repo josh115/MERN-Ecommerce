@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authActions';
+import { Navbar, Nav, Dropdown } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class AppNavbar extends Component {
   state = {
@@ -22,40 +23,40 @@ class AppNavbar extends Component {
 
   render() {
     return (
-      <nav className='navbar navbar-dark bg-dark'>
-        <div className='container'>
-          <a href='/' className='navbar-brand'>
-            Shop Title
-          </a>
-          <div className='flex-row'>
-            <ul className='navbar-nav flex-row'>
-              <li className='nav-item'>
-                <a className='nav-link' onClick={this.props.logout} href='#'>
-                  Logout
-                </a>
-              </li>
-              <li className='nav-item'>
-                <Link to='/basket' className='navbar-link px-2'>
-                  <img src='./images/basket.svg' alt='' />
-                  <span className='sr-only'>Basket</span>
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link to='/search' className='navbar-link px-2'>
-                  <img src='./images/search.svg' alt='' />
-                  <span className='sr-only'>Search</span>
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link to='/login' className='navbar-link px-2'>
-                  <img src='./images/user.svg' alt='' />
-                  <span className='sr-only'>Account</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Navbar bg='dark' variant='dark'>
+        <LinkContainer to='/' exact>
+          <Navbar.Brand>Shop Name</Navbar.Brand>
+        </LinkContainer>
+        <Nav className='mr-auto' />
+        <Nav>
+          <Nav.Link href='/basket'>
+            <img src='./images/basket.svg' alt='' />
+          </Nav.Link>
+          <Nav.Link href='/search'>
+            <img src='./images/search.svg' alt='' />
+          </Nav.Link>
+          <Nav.Item>
+            <Dropdown alignRight>
+              <Dropdown.Toggle id='nav-dropdown'>
+                <img src='./images/user.svg' alt='' />
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <LinkContainer to='/login' exact>
+                  <Dropdown.Item>
+                    <span>Login</span>
+                  </Dropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/register' exact>
+                  <Dropdown.Item>
+                    <span>Register</span>
+                  </Dropdown.Item>
+                </LinkContainer>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Nav.Item>
+        </Nav>
+      </Navbar>
     );
   }
 }
