@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../actions/authActions';
-import { Redirect } from 'react-router-dom';
 
 class Register extends Component {
   state = {
@@ -31,7 +30,7 @@ class Register extends Component {
 
     if (this.state) {
       if (isAuthenticated) {
-        return <Redirect to='/' />;
+        this.props.history.push('/');
       }
     }
   }
