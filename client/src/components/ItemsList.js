@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getItems } from "../actions/itemActions";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getItems } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
 class ItemsList extends Component {
   constructor(props) {
@@ -44,11 +44,11 @@ class ItemsList extends Component {
                     </span>
                   </div>
                   <div className='d-flex justify-content-center mt-3'>
-                    <span>&pound;{price["$numberDecimal"]}</span>
+                    <span>&pound;{price['$numberDecimal']}</span>
                   </div>
                   <div className='input-group mb-3 justify-content-around mt-3'>
                     <form>
-                      <div class='form-group'>
+                      <div className='form-group'>
                         <input
                           type='number'
                           name='quantity'
