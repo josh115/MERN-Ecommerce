@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Logout } from './Logout';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { logout } from '../actions/authActions';
 
 class AppNavbar extends Component {
   state = {
@@ -10,7 +10,8 @@ class AppNavbar extends Component {
   };
 
   static propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired
   };
 
   toggle = () => {
@@ -29,7 +30,9 @@ class AppNavbar extends Component {
           <div className='flex-row'>
             <ul className='navbar-nav flex-row'>
               <li className='nav-item'>
-                <Logout />
+                <a className='nav-link' onClick={this.props.logout} href='#'>
+                  Logout
+                </a>
               </li>
               <li className='nav-item'>
                 <Link to='/basket' className='navbar-link px-2'>
@@ -63,5 +66,6 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
+  { logout },
   null
 )(AppNavbar);
