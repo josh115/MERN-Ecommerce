@@ -64,6 +64,31 @@ export const register = ({
     });
 };
 
+export const login = ({ email, password }) => dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  const body = JSON.stringify({ email, password });
+  axios
+    .post('/api/users/auth', body, config)
+    .then(res =>
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
+      );
+      dispatch({
+        type: LOGIN_FAIL
+      });
+    });
+};
+
 export const logout = () => {
   return {
     type: LOGOUT_SUCCESS
