@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../actions/authActions';
+import { Redirect } from 'react-router-dom';
 
 class Register extends Component {
   state = {
-    modal: false,
     firstname: '',
     lastname: '',
     email: '',
@@ -20,12 +20,18 @@ class Register extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { error } = this.props;
+    const { error, isAuthenticated } = this.props;
     if (error !== prevProps.error) {
       if (error.id === 'REGISTER_FAIL') {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
+      }
+    }
+
+    if (this.state) {
+      if (isAuthenticated) {
+        return <Redirect to='/' />;
       }
     }
   }
