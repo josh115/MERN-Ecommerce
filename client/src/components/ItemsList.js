@@ -36,7 +36,15 @@ class ItemsList extends Component {
               <div className='row flex-row flex-sm-column'>
                 <div className='item-inner'>
                   <div className='d-flex justify-content-center mt-2'>
-                    <img className='item-img' src={image} alt='' />
+                    <img
+                      className='item-img'
+                      src={
+                        image
+                          ? `/images/stock/${image}`
+                          : '/images/stock/missing.png'
+                      }
+                      alt=''
+                    />
                   </div>
                   <div className='d-flex justify-content-center mt-3'>
                     <span>
