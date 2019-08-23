@@ -11,6 +11,7 @@ import { loadUser } from './actions/authActions';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Stock from './components/admin/Stock';
 
 class App extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class App extends Component {
             <Route path='/' exact component={ItemsList} />
             <Route path='/login' exact component={Login} />
             <Route path='/register' exact component={Register} />
+            <Route path='/stock' exact component={Stock} />
           </Switch>
         </Router>
       </Provider>
