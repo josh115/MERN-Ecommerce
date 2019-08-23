@@ -33,12 +33,19 @@
   max-width: 720px;
   margin-top: 50px;
 }
-#nav-dropdown {
+#account-dropdown {
   color: white;
   font-weight: bold;
   border: none;
   background-color: transparent;
 }
-#nav-dropdown:focus {
+#account-dropdown:focus {
   box-shadow: none !important;
+}
+#welcome-msg {
+  color: white;
+}
+.dropdown-item.active {
+  color: #212529;
+  background-color: transparent;
 }
