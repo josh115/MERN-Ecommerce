@@ -1,5 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 .item-list {
   background-color: #f6f6f6;
+  width: calc(100% - 240px);
   max-width: 992px;
 }
 .item-img {
@@ -48,4 +54,19 @@
 .dropdown-item.active {
   color: #212529;
   background-color: transparent;
+}
+.item-img-cart {
+  width: 50px;
+  height: 50px;
+}
+.mini-price {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.sidebar {
+  width: 240px;
+}
+.quanity-icon {
+  cursor: pointer;
 }
