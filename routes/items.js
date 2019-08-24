@@ -55,7 +55,7 @@ router.route('/add').post(upload.single('image'), (req, res) => {
 
   newItem
     .save()
-    .then(() => res.json('Item Added!'))
+    .then(() => res.json({ msg: 'Item Added!', item: newItem }))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 

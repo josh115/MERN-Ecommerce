@@ -4,9 +4,13 @@ import { connect } from 'react-redux';
 import { getItems } from '../../actions/itemActions';
 import { addItem } from '../../actions/itemActions';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 class Stock extends Component {
+  static propTypes = {
+    getItems: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
+  };
+
   state = {
     modal: false,
     name: '',
@@ -50,7 +54,6 @@ class Stock extends Component {
 
     this.props.addItem(formdata);
 
-    // Close modal
     this.toggle();
   };
 
@@ -171,7 +174,8 @@ Stock.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(
