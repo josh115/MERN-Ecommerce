@@ -65,39 +65,41 @@ class AppNavbar extends Component {
     );
 
     return (
-      <Navbar bg='dark' variant='dark'>
-        <LinkContainer to='/' exact>
-          <Navbar.Brand>Shop Name</Navbar.Brand>
-        </LinkContainer>
-        <Nav className='mr-auto'>{isAuthenticated ? authNavItems : null}</Nav>
-        <Nav>
-          <Nav.Link href='/basket'>
-            <img src='./images/basket.svg' alt='' />
-          </Nav.Link>
-          <Nav.Link href='/search'>
-            <img src='./images/search.svg' alt='' />
-          </Nav.Link>
-          <Nav.Item>
-            {isAuthenticated ? (
-              <span className='navbar-text ml-1' id='welcome-msg'>
-                <strong>{user.firstname}</strong>
-              </span>
-            ) : (
-              ''
-            )}
-          </Nav.Item>
-          <Nav.Item>
-            <Dropdown alignRight>
-              <Dropdown.Toggle id='account-dropdown'>
-                <img src='./images/user.svg' alt='' />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {isAuthenticated ? guestDropdownMenu : authDropdownMenu}
-              </Dropdown.Menu>
-            </Dropdown>
-          </Nav.Item>
-        </Nav>
-      </Navbar>
+      <header>
+        <Navbar bg='dark' variant='dark' className='center-nav'>
+          <LinkContainer to='/' exact>
+            <Navbar.Brand>Shop Name</Navbar.Brand>
+          </LinkContainer>
+          <Nav className='mr-auto'>{isAuthenticated ? authNavItems : null}</Nav>
+          <Nav>
+            <Nav.Link href='/basket'>
+              <img src='./images/basket.svg' alt='' />
+            </Nav.Link>
+            <Nav.Link href='/search'>
+              <img src='./images/search.svg' alt='' />
+            </Nav.Link>
+            <Nav.Item>
+              {isAuthenticated ? (
+                <span className='navbar-text ml-1' id='welcome-msg'>
+                  <strong>{user.firstname}</strong>
+                </span>
+              ) : (
+                ''
+              )}
+            </Nav.Item>
+            <Nav.Item>
+              <Dropdown alignRight>
+                <Dropdown.Toggle id='account-dropdown'>
+                  <img src='./images/user.svg' alt='' />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {isAuthenticated ? guestDropdownMenu : authDropdownMenu}
+                </Dropdown.Menu>
+              </Dropdown>
+            </Nav.Item>
+          </Nav>
+        </Navbar>
+      </header>
     );
   }
 }
