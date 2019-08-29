@@ -50,7 +50,6 @@ class Register extends Component {
       email,
       password
     };
-    console.log(newUser);
     this.props.register(newUser);
   };
   render() {
