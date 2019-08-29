@@ -77,13 +77,13 @@ class Stock extends Component {
             </thead>
             <tbody>
               {items.map(
-                ({ _id, name, price, category, SubCategory, image }) => (
+                ({ _id, name, price, category, subcategory, image }) => (
                   <tr key={_id}>
                     <th scope='row'>{_id}</th>
                     <td>{name}</td>
-                    <td>&pound;{price['$numberDecimal']}</td>
+                    <td>&pound;{price}</td>
                     <td>{category}</td>
-                    <td>{SubCategory}</td>
+                    <td>{subcategory}</td>
                   </tr>
                 )
               )}
