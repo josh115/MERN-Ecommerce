@@ -12,7 +12,7 @@ export const getItems = () => dispatch => {
 };
 
 export const addItem = item => dispatch => {
-  axios.post('./api/items/add', item).then(res =>
+  axios.post('/api/items/add', item).then(res =>
     dispatch({
       type: ADD_ITEM,
       payload: { msg: res.data.msg, item: res.data.item }

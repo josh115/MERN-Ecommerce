@@ -9,7 +9,7 @@ export const addToCart = (item, user, quantity) => dispatch => {
   };
   const body = JSON.stringify({ item, user, quantity });
   console.log(body);
-  axios.post('./api/cart/add', body, config).then(res =>
+  axios.post('/api/cart/add', body, config).then(res =>
     dispatch({
       type: ADD_TO_CART,
       payload: {
