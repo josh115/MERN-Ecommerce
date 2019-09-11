@@ -80,7 +80,7 @@ class Login extends Component {
           <div className='form-group row justify-content-center mt-4'>
             <div className='col-12'>
               <button type='submit' className='btn btn-primary btn-block'>
-                Sign Up
+                Login
               </button>
             </div>
           </div>
