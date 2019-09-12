@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Cart = require('../models/cart.model');
 const auth = require('../middleware/auth');
+const Item = require('../models/item.model');
 
 router.route('/:userid').get((req, res) => {
   Cart.findOne({ user: req.params.userid })
@@ -36,10 +37,36 @@ router.route('/add').post((req, res) => {
               }
             )
               .exec()
-              .then(result => res.send(result));
+              .then(result => {
+                Item.findOne({ _id: item.item }).then(NewItem => {
+                  const newQuantity = JSON.stringify(
+                    result.items.find(r => r.item == item.item).quantity +
+                      +item.quantity
+                  );
+                  const cartItemId = result.items.find(r => r.item == item.item)
+                    .id;
+                  res.send({
+                    item: NewItem,
+                    id: cartItemId,
+                    quantity: newQuantity
+                  });
+                });
+              })
+              .catch(err => res.status(400).json('Error: ' + err));
           } else {
-            Cart.updateOne({ user: user }, { $push: { items: item } })
-              .then(result => res.send(result))
+            Cart.findOneAndUpdate({ user: user }, { $push: { items: item } })
+              .then(result => {
+                console.log(result);
+                Item.findOne({ _id: item.item }).then(NewItem => {
+                  const cartItemId = result.items.find(r => r.item == item.item)
+                    .id;
+                  res.send({
+                    item: NewItem,
+                    id: cartItemId,
+                    quantity: item.quantity
+                  });
+                });
+              })
               .catch(err => res.status(400).json('Error: ' + err));
           }
         })
@@ -49,7 +76,16 @@ router.route('/add').post((req, res) => {
         user: user,
         items: [item]
       })
-        .then(documents => res.send(documents))
+        .then(result => {
+          Item.findOne({ _id: item.item }).then(NewItem => {
+            const cartItemId = result.items.find(r => r.item == item.item).id;
+            res.send({
+              item: NewItem,
+              id: cartItemId,
+              quantity: item.quantity
+            });
+          });
+        })
         .catch(err => res.status(400).json('Error: ' + err));
     }
   });

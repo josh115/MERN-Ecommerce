@@ -13,9 +13,9 @@ export const addToCart = (item, user, quantity) => dispatch => {
     dispatch({
       type: ADD_TO_CART,
       payload: {
-        user: res.data.user,
-        item: res.data.items[0].item,
-        quantity: res.data.item[0].quantity
+        id: res.data.id,
+        item: res.data.item,
+        quantity: res.data.quantity
       }
     })
   );

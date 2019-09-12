@@ -46,10 +46,14 @@ class ItemsList extends Component {
 
   onAddToCart = e => {
     e.preventDefault();
-    const item = e.currentTarget.id;
-    const quantity = this.state.quantity;
-    const user = this.props.auth.user._id;
-    this.props.addToCart(item, user, quantity);
+    if (this.props.isAuthenticated) {
+      const item = e.currentTarget.id;
+      const quantity = this.state.quantity;
+      const user = this.props.auth.user._id;
+      this.props.addToCart(item, user, quantity);
+    } else {
+      this.props.history.push('/login');
+    }
   };
 
   render() {
@@ -183,6 +187,7 @@ class ItemsList extends Component {
 }
 
 const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
   item: state.item,
   auth: state.auth,
   cart: state.cart

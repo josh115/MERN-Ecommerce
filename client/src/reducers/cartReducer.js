@@ -14,12 +14,11 @@ export default function(state = initialState, action) {
         cartItems: [
           ...state.cartItems,
           {
-            id: action.payload.id,
-            itemid: action.payload.itemid,
+            _id: action.payload.id,
+            item: action.payload.item,
             quantity: action.payload.quantity
           }
         ]
-        //msg: action.payload.msg
       };
     case GET_CART:
       return {
