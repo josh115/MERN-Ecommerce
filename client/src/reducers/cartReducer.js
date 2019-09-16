@@ -9,17 +9,43 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
-      return {
-        ...state,
-        cartItems: [
-          ...state.cartItems,
-          {
-            _id: action.payload.id,
-            item: action.payload.item,
-            quantity: action.payload.quantity
-          }
-        ]
-      };
+      switch (action.payload.action) {
+        case 'updateQuantity':
+          state.cartItems.map(item => {
+            if (item._id == action.payload.id) {
+              item.quantity = action.payload.quantity;
+            }
+          });
+          return {
+            ...state,
+            cartItems: [...state.cartItems]
+          };
+
+        case 'addItem':
+          return {
+            ...state,
+            cartItems: [
+              ...state.cartItems,
+              {
+                _id: action.payload.id,
+                item: action.payload.item,
+                quantity: action.payload.quantity
+              }
+            ]
+          };
+        default:
+          return {
+            ...state,
+            cartItems: [
+              ...state.cartItems,
+              {
+                _id: action.payload.id,
+                item: action.payload.item,
+                quantity: action.payload.quantity
+              }
+            ]
+          };
+      }
     case GET_CART:
       return {
         ...state,

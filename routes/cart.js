@@ -47,8 +47,9 @@ router.route('/add').post((req, res) => {
                     .id;
                   res.send({
                     item: NewItem,
-                    id: cartItemId,
-                    quantity: newQuantity
+                    id: item.item,
+                    quantity: newQuantity,
+                    action: 'updateQuantity'
                   });
                 });
               })
@@ -56,14 +57,16 @@ router.route('/add').post((req, res) => {
           } else {
             Cart.findOneAndUpdate({ user: user }, { $push: { items: item } })
               .then(result => {
-                console.log(result);
                 Item.findOne({ _id: item.item }).then(NewItem => {
+                  /*
                   const cartItemId = result.items.find(r => r.item == item.item)
                     .id;
+                  */
                   res.send({
                     item: NewItem,
-                    id: cartItemId,
-                    quantity: item.quantity
+                    id: item.item,
+                    quantity: item.quantity,
+                    action: 'addItem'
                   });
                 });
               })
@@ -81,7 +84,7 @@ router.route('/add').post((req, res) => {
             const cartItemId = result.items.find(r => r.item == item.item).id;
             res.send({
               item: NewItem,
-              id: cartItemId,
+              id: item.item,
               quantity: item.quantity
             });
           });
