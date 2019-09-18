@@ -4,6 +4,7 @@ import { getItems } from '../actions/itemActions';
 import { addToCart, getCart } from '../actions/cartActions';
 import PropTypes from 'prop-types';
 import { Button, Form, Col, Row, ListGroup } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class ItemsList extends Component {
   constructor(props) {
@@ -60,7 +61,6 @@ class ItemsList extends Component {
     const { items } = this.props.item;
     const { isAuthenticated, user } = this.props.auth;
     const { cartItems } = this.props.cart;
-    console.log(this.props.cart);
     return (
       <div className='d-flex flex-row justify-content-center'>
         <div className='item-list'>
@@ -136,14 +136,16 @@ class ItemsList extends Component {
                 </div>
                 <div className='col-4'>
                   <span>
-                    <strong>&pound;3.00</strong>
+                    <strong>&pound;{this.props.cart.total.toFixed(2)}</strong>
                   </span>
                 </div>
                 <div className='col-4'>
                   <img src='./images/cart-total.svg' alt='' />
                 </div>
               </div>
-              <Button block>Checkout</Button>
+              <LinkContainer to='/checkout' exact>
+                <Button block>Checkout</Button>
+              </LinkContainer>
             </ListGroup.Item>
             {cartItems.map(({ _id, item, quantity }) => (
               <ListGroup.Item className='p-2' key={_id}>
