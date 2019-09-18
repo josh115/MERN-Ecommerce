@@ -12,6 +12,7 @@ import { loadUser } from './actions/authActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Stock from './components/admin/Stock';
+import Checkout from './components/Checkout';
 
 class App extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class App extends Component {
             <Route path='/login' exact component={Login} />
             <Route path='/register' exact component={Register} />
             <Route path='/stock' exact component={Stock} />
+            <Route path='/checkout' exact component={Checkout} />
           </Switch>
         </Router>
       </Provider>
