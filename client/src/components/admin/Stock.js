@@ -17,7 +17,7 @@ class Stock extends Component {
     price: '',
     category: '',
     subcategory: '',
-    selectedFile: null
+    selectedFile: { name: 'Choose Image' }
   };
 
   componentDidMount() {
@@ -130,7 +130,7 @@ class Stock extends Component {
                       className='custom-file-label'
                       htmlFor='inputGroupFile01'
                     >
-                      Choose file
+                      {this.state.selectedFile.name}
                     </label>
                   </div>
                 </div>
