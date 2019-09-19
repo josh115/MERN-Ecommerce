@@ -56,7 +56,17 @@ class Stock extends Component {
 
     this.toggle();
   };
-
+  HideModal = e => {
+    this.setState({
+      modal: false,
+      name: '',
+      price: '',
+      category: '',
+      subcategory: '',
+      selectedFile: { name: 'Choose Image' }
+    });
+    this.toggle();
+  };
   render() {
     const { items } = this.props.item;
     return (
@@ -90,7 +100,7 @@ class Stock extends Component {
             </tbody>
           </table>
         </Container>
-        <Modal show={this.state.modal} onHide={this.toggle}>
+        <Modal show={this.state.modal} onHide={this.HideModal}>
           <Modal.Header>Add New Item</Modal.Header>
           <Modal.Body>
             <Form onSubmit={this.onSubmit}>
