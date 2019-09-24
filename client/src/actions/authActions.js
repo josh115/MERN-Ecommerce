@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { returnErrors } from './errorActions';
-
 import {
   USER_LOADED,
   USER_LOADING,
@@ -11,6 +10,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL
 } from './types';
+import { getCart } from './cartActions';
 
 // Check token and load user
 export const loadUser = () => (dispatch, getState) => {
@@ -63,7 +63,6 @@ export const register = ({
       });
     });
 };
-
 export const login = ({ email, password }) => dispatch => {
   const config = {
     headers: {
@@ -73,12 +72,13 @@ export const login = ({ email, password }) => dispatch => {
   const body = JSON.stringify({ email, password });
   axios
     .post('/api/users/auth', body, config)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+      dispatch(getCart(res.data.user.id));
+    })
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
@@ -88,7 +88,6 @@ export const login = ({ email, password }) => dispatch => {
       });
     });
 };
-
 export const logout = () => {
   return {
     type: LOGOUT_SUCCESS

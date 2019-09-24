@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/itemActions';
 import { addToCart, getCart } from '../actions/cartActions';
@@ -30,7 +30,7 @@ class ItemsList extends Component {
     this.props.getItems();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.auth !== this.props.auth &&
       !this.props.auth.isLoading &&
@@ -61,6 +61,45 @@ class ItemsList extends Component {
     const { items } = this.props.item;
     const { isAuthenticated, user } = this.props.auth;
     const { cartItems } = this.props.cart;
+
+    const userCart = (
+      <Fragment>
+        {cartItems.map(({ _id, item, quantity }) => (
+          <ListGroup.Item className='p-2' key={_id}>
+            <div className='d-flex position-relative'>
+              <div className='d-flex align-self-center flex-column'>
+                <img
+                  src='./images/plus-square.svg'
+                  alt=''
+                  className='quanity-icon'
+                />
+                <span className='text-center'>{quantity}</span>
+                <img
+                  src='./images/minus-square.svg'
+                  alt=''
+                  className='quanity-icon'
+                />
+              </div>
+              <div className='align-self-center pl-0 pr-1'>
+                <img
+                  className='item-img-cart'
+                  src={`/images/stock/${item.image}`}
+                  alt=''
+                />
+              </div>
+              <div className='align-self-center p-0'>
+                <span>{item.name}</span>
+              </div>
+              <div className='mini-price'>
+                <span>
+                  <strong>&pound;{item.price}</strong>
+                </span>
+              </div>
+            </div>
+          </ListGroup.Item>
+        ))}
+      </Fragment>
+    );
     return (
       <div className='d-flex flex-row justify-content-center'>
         <div className='item-list'>
@@ -147,40 +186,7 @@ class ItemsList extends Component {
                 <Button block>Checkout</Button>
               </LinkContainer>
             </ListGroup.Item>
-            {cartItems.map(({ _id, item, quantity }) => (
-              <ListGroup.Item className='p-2' key={_id}>
-                <div className='d-flex position-relative'>
-                  <div className='d-flex align-self-center flex-column'>
-                    <img
-                      src='./images/plus-square.svg'
-                      alt=''
-                      className='quanity-icon'
-                    />
-                    <span className='text-center'>{quantity}</span>
-                    <img
-                      src='./images/minus-square.svg'
-                      alt=''
-                      className='quanity-icon'
-                    />
-                  </div>
-                  <div className='align-self-center pl-0 pr-1'>
-                    <img
-                      className='item-img-cart'
-                      src={`/images/stock/${item.image}`}
-                      alt=''
-                    />
-                  </div>
-                  <div className='align-self-center p-0'>
-                    <span>{item.name}</span>
-                  </div>
-                  <div className='mini-price'>
-                    <span>
-                      <strong>&pound;{item.price}</strong>
-                    </span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-            ))}
+            {isAuthenticated ? userCart : null}
           </ListGroup>
         </div>
       </div>
