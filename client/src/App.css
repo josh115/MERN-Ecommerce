@@ -87,6 +87,11 @@ header {
   overflow: hidden;
   text-align: center;
 }
+.stockicon {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
 @media (min-width: 576px) {
   .item-inner {
     border-radius: 15px;

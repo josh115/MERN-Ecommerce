@@ -83,6 +83,8 @@ class Stock extends Component {
                 <th scope='col'>Price</th>
                 <th scope='col'>Category</th>
                 <th scope='col'>Sub Category</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -94,6 +96,15 @@ class Stock extends Component {
                     <td>&pound;{price}</td>
                     <td>{category}</td>
                     <td>{subcategory}</td>
+                    <td>
+                      <img className='stockicon' src='./images/editicon.png' />
+                    </td>
+                    <td>
+                      <img
+                        className='stockicon'
+                        src='./images/deleteicon.png'
+                      />
+                    </td>
                   </tr>
                 )
               )}
