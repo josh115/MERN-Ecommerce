@@ -57,6 +57,18 @@ class ItemsList extends Component {
     }
   };
 
+  changeQuantity = e => {
+    const itemid = e.target.parentNode.parentNode.parentNode.getAttribute(
+      'data-id'
+    );
+    const user = this.props.auth.user._id;
+    if (e.target.id === 'addicon') {
+      this.props.addToCart(itemid, user, 1);
+    } else {
+      this.props.addToCart(itemid, user, -1);
+    }
+  };
+
   render() {
     const { items } = this.props.item;
     const { isAuthenticated, user } = this.props.auth;
@@ -65,19 +77,23 @@ class ItemsList extends Component {
     const userCart = (
       <Fragment>
         {cartItems.map(({ _id, item, quantity }) => (
-          <ListGroup.Item className='p-2' key={_id}>
+          <ListGroup.Item className='p-2' key={_id} data-id={item._id}>
             <div className='d-flex position-relative'>
               <div className='d-flex align-self-center flex-column'>
                 <img
                   src='./images/plus-square.svg'
+                  id='addicon'
                   alt=''
                   className='quanity-icon'
+                  onClick={this.changeQuantity}
                 />
                 <span className='text-center'>{quantity}</span>
                 <img
                   src='./images/minus-square.svg'
+                  id='minusicon'
                   alt=''
                   className='quanity-icon'
+                  onClick={this.changeQuantity}
                 />
               </div>
               <div className='align-self-center pl-0 pr-1'>
@@ -175,7 +191,12 @@ class ItemsList extends Component {
                 </div>
                 <div className='col-4'>
                   <span>
-                    <strong>&pound;{this.props.cart.total.toFixed(2)}</strong>
+                    <strong>
+                      &pound;
+                      {isAuthenticated
+                        ? this.props.cart.total.toFixed(2)
+                        : '0.00'}
+                    </strong>
                   </span>
                 </div>
                 <div className='col-4'>
