@@ -64,7 +64,9 @@ header {
 .cartitembtn {
   min-width: 45px;
 }
-
+.sidebaritems {
+  overflow-y: auto;
+}
 /* responsive css */
 .item-list {
   width: 100%;

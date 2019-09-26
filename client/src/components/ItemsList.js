@@ -76,44 +76,46 @@ class ItemsList extends Component {
 
     const userCart = (
       <Fragment>
-        {cartItems.map(({ _id, item, quantity }) => (
-          <ListGroup.Item className='p-2' key={_id} data-id={item._id}>
-            <div className='d-flex position-relative'>
-              <div className='d-flex align-self-center flex-column'>
-                <img
-                  src='./images/plus-square.svg'
-                  id='addicon'
-                  alt=''
-                  className='quanity-icon'
-                  onClick={this.changeQuantity}
-                />
-                <span className='text-center'>{quantity}</span>
-                <img
-                  src='./images/minus-square.svg'
-                  id='minusicon'
-                  alt=''
-                  className='quanity-icon'
-                  onClick={this.changeQuantity}
-                />
+        <div class='sidebaritems'>
+          {cartItems.map(({ _id, item, quantity }) => (
+            <ListGroup.Item className='p-2' key={_id} data-id={item._id}>
+              <div className='d-flex position-relative'>
+                <div className='d-flex align-self-center flex-column'>
+                  <img
+                    src='./images/plus-square.svg'
+                    id='addicon'
+                    alt=''
+                    className='quanity-icon'
+                    onClick={this.changeQuantity}
+                  />
+                  <span className='text-center'>{quantity}</span>
+                  <img
+                    src='./images/minus-square.svg'
+                    id='minusicon'
+                    alt=''
+                    className='quanity-icon'
+                    onClick={this.changeQuantity}
+                  />
+                </div>
+                <div className='align-self-center pl-0 pr-1'>
+                  <img
+                    className='item-img-cart'
+                    src={`/images/stock/${item.image}`}
+                    alt=''
+                  />
+                </div>
+                <div className='align-self-center p-0'>
+                  <span>{item.name}</span>
+                </div>
+                <div className='mini-price'>
+                  <span>
+                    <strong>&pound;{item.price.toFixed(2)}</strong>
+                  </span>
+                </div>
               </div>
-              <div className='align-self-center pl-0 pr-1'>
-                <img
-                  className='item-img-cart'
-                  src={`/images/stock/${item.image}`}
-                  alt=''
-                />
-              </div>
-              <div className='align-self-center p-0'>
-                <span>{item.name}</span>
-              </div>
-              <div className='mini-price'>
-                <span>
-                  <strong>&pound;{item.price.toFixed(2)}</strong>
-                </span>
-              </div>
-            </div>
-          </ListGroup.Item>
-        ))}
+            </ListGroup.Item>
+          ))}
+        </div>
       </Fragment>
     );
     return (
