@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown, Container, Button, Modal, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { getItems } from '../../actions/itemActions';
-import { addItem } from '../../actions/itemActions';
+import { getItems, addItem, deleteItem } from '../../actions/itemActions';
 import PropTypes from 'prop-types';
 
 class Stock extends Component {
@@ -56,6 +55,7 @@ class Stock extends Component {
 
     this.toggle();
   };
+
   HideModal = e => {
     this.setState({
       modal: false,
@@ -67,6 +67,14 @@ class Stock extends Component {
     });
     this.toggle();
   };
+
+  deleteItem = e => {
+    const itemid = e.target.parentNode.parentNode.getAttribute('data-id');
+    this.props.deleteItem(itemid);
+  };
+
+  editItem = e => {};
+
   render() {
     const { items } = this.props.item;
     return (
@@ -90,19 +98,24 @@ class Stock extends Component {
             <tbody>
               {items.map(
                 ({ _id, name, price, category, subcategory, image }) => (
-                  <tr key={_id}>
+                  <tr key={_id} data-id={_id}>
                     <th scope='row'>{_id}</th>
                     <td>{name}</td>
                     <td>&pound;{price}</td>
                     <td>{category}</td>
                     <td>{subcategory}</td>
                     <td>
-                      <img className='stockicon' src='./images/editicon.png' />
+                      <img
+                        className='stockicon'
+                        src='./images/editicon.png'
+                        onClick={this.editItem}
+                      />
                     </td>
                     <td>
                       <img
                         className='stockicon'
                         src='./images/deleteicon.png'
+                        onClick={this.deleteItem}
                       />
                     </td>
                   </tr>
@@ -201,5 +214,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getItems, addItem }
+  { getItems, addItem, deleteItem }
 )(Stock);

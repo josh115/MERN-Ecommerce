@@ -59,4 +59,10 @@ router.route('/add').post(upload.single('image'), (req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/delete/:id').delete(auth, (req, res) => {
+  Item.findById(req.params.id)
+    .then(item => item.remove().then(() => res.json(req.params.id)))
+    .catch(err => res.status(404).json());
+});
+
 module.exports = router;

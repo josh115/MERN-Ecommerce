@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
+import { tokenConfig } from './authActions';
 
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
@@ -20,11 +21,16 @@ export const addItem = item => dispatch => {
   );
 };
 
-export const deleteItem = id => {
-  return {
-    type: DELETE_ITEM,
-    payload: id
-  };
+export const deleteItem = id => (dispatch, getState) => {
+  axios
+    .delete(`/api/items/delete/${id}`, tokenConfig(getState))
+    .then(res =>
+      dispatch({
+        type: DELETE_ITEM,
+        payload: res.data
+      })
+    )
+    .catch();
 };
 
 export const setItemsLoading = () => {
