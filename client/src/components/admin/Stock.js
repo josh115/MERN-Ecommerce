@@ -12,11 +12,17 @@ class Stock extends Component {
 
   state = {
     modal: false,
+    editModal: false,
     name: '',
     price: '',
     category: '',
     subcategory: '',
-    selectedFile: { name: 'Choose Image' }
+    selectedFile: { name: 'Choose Image' },
+    editName: '',
+    editPrice: '',
+    editCategory: '',
+    editSubcategory: '',
+    editSelectedFile: ''
   };
 
   componentDidMount() {
@@ -29,6 +35,11 @@ class Stock extends Component {
     });
   };
 
+  toggleEdit = () => {
+    this.setState({
+      editModal: !this.state.editModal
+    });
+  };
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -73,7 +84,20 @@ class Stock extends Component {
     this.props.deleteItem(itemid);
   };
 
-  editItem = e => {};
+  editItem = e => {
+    const itemid = e.target.parentNode.parentNode.getAttribute('data-id');
+    const itemToEdit = this.props.item.items.filter(
+      item => item._id === itemid
+    )[0];
+    this.setState({
+      editName: itemToEdit.name,
+      editPrice: itemToEdit.price,
+      editCategory: itemToEdit.category,
+      editSubcategory: itemToEdit.subcategory,
+      editSelectedFile: itemToEdit.image
+    });
+    this.toggleEdit();
+  };
 
   render() {
     const { items } = this.props.item;
@@ -186,6 +210,84 @@ class Stock extends Component {
                   name='subcategory'
                   id='subcategory'
                   placeholder='Sub Category'
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+              <div className='d-flex justify-content-center'>
+                <Button variant='primary' type='submit' block>
+                  Add Item
+                </Button>
+              </div>
+            </Form>
+          </Modal.Body>
+        </Modal>
+
+        <Modal show={this.state.editModal} onHide={this.toggleEdit}>
+          <Modal.Header>Edit Item</Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={this.onSubmit}>
+              <Form.Group>
+                <Form.Label htmlFor='itemname'>Item Name</Form.Label>
+                <Form.Control
+                  type='text'
+                  name='name'
+                  id='itemname'
+                  placeholder='Item Name'
+                  value={this.state.editName}
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label htmlFor='price'>Price</Form.Label>
+                <Form.Control
+                  type='text'
+                  name='price'
+                  id='price'
+                  placeholder='Price'
+                  value={this.state.editPrice}
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label htmlFor='image'>Image</Form.Label>
+                <div className='input-group'>
+                  <div className='custom-file'>
+                    <input
+                      type='file'
+                      name='image'
+                      className='custom-file-input'
+                      id='inputGroupFile01'
+                      aria-describedby='inputGroupFileAddon01'
+                      onChange={this.onFileSelect}
+                    />
+                    <label
+                      className='custom-file-label'
+                      htmlFor='inputGroupFile01'
+                    >
+                      {this.state.editSelectedFile}
+                    </label>
+                  </div>
+                </div>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label htmlFor='category'>Category</Form.Label>
+                <Form.Control
+                  type='text'
+                  name='category'
+                  id='category'
+                  placeholder='Category'
+                  value={this.state.editCategory}
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label htmlFor='subcategory'>Sub Category</Form.Label>
+                <Form.Control
+                  type='text'
+                  name='subcategory'
+                  id='subcategory'
+                  placeholder='Sub Category'
+                  value={this.state.editSubcategory}
                   onChange={this.onChange}
                 />
               </Form.Group>
