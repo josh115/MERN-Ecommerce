@@ -108,7 +108,7 @@ class ItemsList extends Component {
               </div>
               <div className='mini-price'>
                 <span>
-                  <strong>&pound;{item.price}</strong>
+                  <strong>&pound;{item.price.toFixed(2)}</strong>
                 </span>
               </div>
             </div>
@@ -144,7 +144,7 @@ class ItemsList extends Component {
                       </span>
                     </div>
                     <div className='d-flex justify-content-sm-center mt-3 mb-3'>
-                      <span>&pound;{price}</span>
+                      <span>&pound;{price.toFixed(2)}</span>
                     </div>
                     <Form
                       onSubmit={this.onAddToCart}
