@@ -42,15 +42,22 @@ class ItemsList extends Component {
   }
 
   onQuantityChange(e) {
-    this.setState({ quantity: e.target.value });
+    this.setState({
+      [e.target.parentNode.parentNode.parentNode.id]: e.target.value
+    });
   }
 
   onAddToCart = e => {
     e.preventDefault();
     if (this.props.isAuthenticated) {
       const item = e.currentTarget.id;
-      const quantity = this.state.quantity;
+      var quantity;
       const user = this.props.auth.user._id;
+      if (this.state[item] > 0) {
+        quantity = this.state[item];
+      } else {
+        quantity = 1;
+      }
       this.props.addToCart(item, user, quantity);
     } else {
       this.props.history.push('/login');
@@ -76,7 +83,7 @@ class ItemsList extends Component {
 
     const userCart = (
       <Fragment>
-        <div class='sidebaritems'>
+        <div className='sidebaritems'>
           {cartItems.map(({ _id, item, quantity }) => (
             <ListGroup.Item className='p-2' key={_id} data-id={item._id}>
               <div className='d-flex position-relative'>
