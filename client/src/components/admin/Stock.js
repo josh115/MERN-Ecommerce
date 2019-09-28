@@ -94,11 +94,29 @@ class Stock extends Component {
       editPrice: itemToEdit.price,
       editCategory: itemToEdit.category,
       editSubcategory: itemToEdit.subcategory,
-      editSelectedFile: itemToEdit.image
+      editSelectedFile: { name: itemToEdit.image }
     });
     this.toggleEdit();
   };
 
+  onEditSubmit = e => {
+    e.preventDefault();
+    const formdata = new FormData();
+    formdata.append('name', this.state.editName);
+    formdata.append('price', this.state.editPrice);
+    formdata.append('category', this.state.editCategory);
+    formdata.append('subcategory', this.state.editSubcategory);
+    formdata.append(
+      'image',
+      this.state.selectedFile,
+      this.state.selectedFile.name
+    );
+
+    console.log(formdata);
+    this.props.editItem(formdata);
+
+    this.toggleEdit();
+  };
   render() {
     const { items } = this.props.item;
     return (
@@ -225,12 +243,12 @@ class Stock extends Component {
         <Modal show={this.state.editModal} onHide={this.toggleEdit}>
           <Modal.Header>Edit Item</Modal.Header>
           <Modal.Body>
-            <Form onSubmit={this.onSubmit}>
+            <Form onSubmit={this.onEditSubmit}>
               <Form.Group>
-                <Form.Label htmlFor='itemname'>Item Name</Form.Label>
+                <Form.Label htmlFor='editName'>Item Name</Form.Label>
                 <Form.Control
                   type='text'
-                  name='name'
+                  name='editName'
                   id='itemname'
                   placeholder='Item Name'
                   value={this.state.editName}
@@ -238,10 +256,10 @@ class Stock extends Component {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label htmlFor='price'>Price</Form.Label>
+                <Form.Label htmlFor='editPrice'>Price</Form.Label>
                 <Form.Control
                   type='text'
-                  name='price'
+                  name='editPrice'
                   id='price'
                   placeholder='Price'
                   value={this.state.editPrice}
@@ -258,22 +276,22 @@ class Stock extends Component {
                       className='custom-file-input'
                       id='inputGroupFile01'
                       aria-describedby='inputGroupFileAddon01'
-                      onChange={this.onFileSelect}
+                      onChange={this.editSelectedFile}
                     />
                     <label
                       className='custom-file-label'
                       htmlFor='inputGroupFile01'
                     >
-                      {this.state.editSelectedFile}
+                      {this.state.editSelectedFile.name}
                     </label>
                   </div>
                 </div>
               </Form.Group>
               <Form.Group>
-                <Form.Label htmlFor='category'>Category</Form.Label>
+                <Form.Label htmlFor='editCategory'>Category</Form.Label>
                 <Form.Control
                   type='text'
-                  name='category'
+                  name='editCategory'
                   id='category'
                   placeholder='Category'
                   value={this.state.editCategory}
@@ -281,10 +299,10 @@ class Stock extends Component {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label htmlFor='subcategory'>Sub Category</Form.Label>
+                <Form.Label htmlFor='editSubcategory'>Sub Category</Form.Label>
                 <Form.Control
                   type='text'
-                  name='subcategory'
+                  name='editSubcategory'
                   id='subcategory'
                   placeholder='Sub Category'
                   value={this.state.editSubcategory}
@@ -293,7 +311,7 @@ class Stock extends Component {
               </Form.Group>
               <div className='d-flex justify-content-center'>
                 <Button variant='primary' type='submit' block>
-                  Add Item
+                  Update Item
                 </Button>
               </div>
             </Form>
